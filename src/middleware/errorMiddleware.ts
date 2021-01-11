@@ -1,5 +1,5 @@
 import {Request,Response,NextFunction} from "express";
-import HttpException from "../ exception/HttpException";
+import HttpException from "../exception/HttpException";
 import {INTERNAL_SERVER_ERROR} from "http-status-codes";
 
 const errorMiddleware = (err:HttpException,_req:Request,res:Response,_next:NextFunction)=>{
