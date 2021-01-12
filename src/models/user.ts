@@ -2,13 +2,14 @@ import mongoose,{Schema,Model,Document} from 'mongoose';
 import bcryptjs from 'bcryptjs'
 import validator from "validator";
 import jwt from 'jsonwebtoken';
+import {UserPayload} from '../typings/payload';
 
 export interface UserDocument extends Document{
     username:string,
     password:string,
     email:string,
     avatar:string,
-    getAccessToken:()=>string
+    getAccessToken:()=>string,
 }
 
 const UserSchema:Schema<UserDocument> = new Schema({
@@ -27,7 +28,17 @@ const UserSchema:Schema<UserDocument> = new Schema({
         },
         trim:true
     }
-},{timestamps:true});
+},{timestamps:true,toJSON:{
+        transform:function (_doc:any,result:any) {
+            result.id = result._id;
+            delete result._id;
+            delete result.__v;
+            delete result.password;
+            delete result.createdAt;
+            delete result.updatedAt;
+            return result;
+        }
+    }});
 // 每次保存文档之前执行此操作
 UserSchema.pre<UserDocument>('save',async function(next){
     if(!this.isModified('password')) {
@@ -57,7 +68,7 @@ UserSchema.static('login',async function (this:any,username:string,password:stri
 })
 // 给实例上面扩展方法
 UserSchema.methods.getAccessToken = function(this:UserDocument):string{
-    const payload = {id:this._id}; // payload 是放在jwt token 里存放的数据
+    const payload:UserPayload = {id:this._id}; // payload 是放在jwt token 里存放的数据
     return jwt.sign(payload,process.env.JWT_SECRET_KEY || 'zhufeng',{expiresIn:'1h'});
 }
 interface UserModel<T extends Document> extends Model <T>{

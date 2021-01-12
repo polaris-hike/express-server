@@ -24,8 +24,11 @@ app.get('/',(_req,res,_next)=>{
         data:'hello world'
     });
 });
+// 注册接口
 app.post('/user/register',UserController.register);
+// 登录接口
 app.post('/user/login',UserController.login);
+app.get('/user/validate',UserController.validate)
 // 没有匹配到任何路由，则创建一个自定义404错误对象并传递给错误处理中间件
 app.use((_req:Request,_res:Response,next:NextFunction)=>{
     const error:HttpException = new HttpException(404,'尚未为此路径分配路由')
