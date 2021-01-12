@@ -1,12 +1,14 @@
 import mongoose,{Schema,Model,Document} from 'mongoose';
 import bcryptjs from 'bcryptjs'
 import validator from "validator";
+import jwt from 'jsonwebtoken';
 
 export interface UserDocument extends Document{
     username:string,
     password:string,
     email:string,
-    avatar:string
+    avatar:string,
+    getAccessToken:()=>string
 }
 
 const UserSchema:Schema<UserDocument> = new Schema({
@@ -39,6 +41,7 @@ UserSchema.pre<UserDocument>('save',async function(next){
     }
 })
 
+// 给类上面扩展方法
 UserSchema.static('login',async function (this:any,username:string,password:string):Promise<UserDocument | null> {
     const user:UserDocument | null = await this.model('User').findOne({username});
     if(user){
@@ -52,6 +55,11 @@ UserSchema.static('login',async function (this:any,username:string,password:stri
         return  null
     }
 })
+// 给实例上面扩展方法
+UserSchema.methods.getAccessToken = function(this:UserDocument):string{
+    const payload = {id:this._id}; // payload 是放在jwt token 里存放的数据
+    return jwt.sign(payload,process.env.JWT_SECRET_KEY || 'zhufeng',{expiresIn:'1h'});
+}
 interface UserModel<T extends Document> extends Model <T>{
     login:(username:string,password:string)=>UserDocument | null
 }

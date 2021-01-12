@@ -32,9 +32,10 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     try {
         const user:UserDocument | null = await User.login(username,password);
         if(user){
+            const access_token = user.getAccessToken();
             res.json({
                 success: true,
-                data: user
+                data: access_token
             });
         }else {
             throw new HttpException(UNAUTHORIZED, '登录失败')
