@@ -16,11 +16,17 @@ app.use(morgan('dev'));
 app.use(helmet);*/
 /*app.use(express.static(path.join(__dirname,'public')));*/
 
-app.all('*', function(_req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    next();
+app.all('*', function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Headers', 'Content-Type,Content-Length,Authorization,Accept,X-Requested-With');
+    res.header('Access-Control-Allow-Methods','PUT,POST,GET,DELETE,OPTIONS');
+    res.header('X-Powered-By', '3.2.1')
+    if(req.method === 'OPTIONS') {
+        res.send(200);
+    } else {
+        next();
+    }
 });
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.get('/',(_req,res,_next)=>{
