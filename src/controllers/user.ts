@@ -50,15 +50,19 @@ export const validate = async (req: Request, res: Response, next: NextFunction) 
     if(authorization){
         const access_token = authorization.split(' ')[1];
         if(access_token){
-            const userPayload:UserPayload = jwt.verify(access_token,process.env.JWT_SECRET_KEY || 'zhufeng') as UserPayload;
-            const user:UserDocument | null = await User.findById(userPayload.id);
-            if(user){
-                res.json({
-                    success:true,
-                    data:user.toJSON()
-                })
-            }else {
-                next(new HttpException(UNAUTHORIZED, '用户未找到'))
+            try {
+                const userPayload:UserPayload = jwt.verify(access_token,process.env.JWT_SECRET_KEY || 'zhufeng') as UserPayload;
+                const user:UserDocument | null = await User.findById(userPayload.id);
+                if(user){
+                    res.json({
+                        success:true,
+                        data:user.toJSON()
+                    })
+                }else {
+                    next(new HttpException(UNAUTHORIZED, '用户未找到'))
+                }
+            }catch (error) {
+                next(new HttpException(UNAUTHORIZED, 'access_token 不合法'))
             }
         }else {
             next(new HttpException(UNAUTHORIZED, 'access_token 未提供'))

@@ -3,11 +3,14 @@ import HttpException from "../exception/HttpException";
 import {INTERNAL_SERVER_ERROR} from "http-status-codes";
 
 const errorMiddleware = (err:HttpException,_req:Request,res:Response,_next:NextFunction)=>{
-    res.status(err.status ||INTERNAL_SERVER_ERROR).json({
-        success:false,
-        message:err.message,
-        errors:err.errors
-    })
+   let result:any = {
+       success:false,
+       message:err.message,
+   }
+   if(err.errors && Object.keys(err.errors).length > 0){
+       result.errors = err.errors
+   }
+    res.status(err.status ||INTERNAL_SERVER_ERROR).json(result)
 }
 
 export default errorMiddleware;
