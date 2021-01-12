@@ -16,6 +16,11 @@ app.use(morgan('dev'));
 app.use(helmet);*/
 /*app.use(express.static(path.join(__dirname,'public')));*/
 
+app.all('*', function(_req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.get('/',(_req,res,_next)=>{
