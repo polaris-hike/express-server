@@ -39,4 +39,21 @@ UserSchema.pre<UserDocument>('save',async function(next){
     }
 })
 
-export const User:Model<UserDocument> = mongoose.model<UserDocument>('user',UserSchema);
+UserSchema.static('login',async function (this:any,username:string,password:string):Promise<UserDocument | null> {
+    const user:UserDocument | null = await this.model('User').findOne({username});
+    if(user){
+        const matched = await bcryptjs.compare(password,user.password);
+        if(matched){
+            return user
+        }else {
+            return null
+        }
+    }else {
+        return  null
+    }
+})
+interface UserModel<T extends Document> extends Model <T>{
+    login:(username:string,password:string)=>UserDocument | null
+}
+// @ts-ignore
+export const User:UserModel<UserDocument> = mongoose.model<UserDocument,UserModel<UserDocument>>('User',UserSchema);

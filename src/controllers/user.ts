@@ -2,7 +2,7 @@ import {Request, Response, NextFunction} from "express";
 import {User, UserDocument} from "../models";
 import {validateRegisterInput} from "../utils/validator";
 import HttpException from "../exception/HttpException";
-import {UNPROCESSABLE_ENTITY} from "http-status-codes";
+import {UNPROCESSABLE_ENTITY,UNAUTHORIZED} from "http-status-codes";
 
 
 export const register = async (req: Request, res: Response, next: NextFunction) => {
@@ -25,6 +25,21 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
     } catch (error) {
         next((error))
     }
+}
 
-
+export const login = async (req: Request, res: Response, next: NextFunction) => {
+    const {username, password} = req.body;
+    try {
+        const user:UserDocument | null = await User.login(username,password);
+        if(user){
+            res.json({
+                success: true,
+                data: user
+            });
+        }else {
+            throw new HttpException(UNAUTHORIZED, '登录失败')
+        }
+    } catch (error) {
+        next((error))
+    }
 }

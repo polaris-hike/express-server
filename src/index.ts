@@ -25,6 +25,7 @@ app.get('/',(_req,res,_next)=>{
     });
 });
 app.post('/user/register',UserController.register);
+app.post('/user/login',UserController.login);
 // 没有匹配到任何路由，则创建一个自定义404错误对象并传递给错误处理中间件
 app.use((_req:Request,_res:Response,next:NextFunction)=>{
     const error:HttpException = new HttpException(404,'尚未为此路径分配路由')
