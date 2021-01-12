@@ -1,4 +1,5 @@
 import mongoose,{Schema,Model,Document} from 'mongoose';
+import bcryptjs from 'bcryptjs'
 import validator from "validator";
 
 export interface UserDocument extends Document{
@@ -25,5 +26,17 @@ const UserSchema:Schema<UserDocument> = new Schema({
         trim:true
     }
 },{timestamps:true});
+// 每次保存文档之前执行此操作
+UserSchema.pre<UserDocument>('save',async function(next){
+    if(!this.isModified('password')) {
+        return next()
+    }
+    try {
+        this.password = await bcryptjs.hash(this.password,10)
+        next()
+    }catch (error) {
+        next(error)
+    }
+})
 
 export const User:Model<UserDocument> = mongoose.model<UserDocument>('user',UserSchema);

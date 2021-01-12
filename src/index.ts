@@ -2,9 +2,9 @@ import express, {Express, Request,Response,NextFunction} from 'express';   // �
 import mongoose from 'mongoose'; // 用来连接数据库
 /*import cors from 'cors';         // 解决跨域
 import morgan from "morgan";     // 输出访问日志
-import helmet from 'helmet';     // 安全过滤
+import helmet from 'helmet';  */   // 安全过滤
 //import multer from "multer";     // 上传头像
-import path from "path";*/
+//import path from "path";
 import 'dotenv/config';          // 读取 .env 然后写入 process.env
 import errorMiddleware from "./middleware/errorMiddleware";
 import HttpException from "./exception/HttpException";
@@ -13,10 +13,9 @@ import bodyParser from "body-parser";
 const app:Express = express();
 /*app.use(cors);
 app.use(morgan('dev'));
-app.use(helmet);
-app.use(express.static(path.join(__dirname,'public')));
-app.use(express.json); // express.json = bodyParser.json
-app.use(express.urlencoded({extended:true}));*/
+app.use(helmet);*/
+/*app.use(express.static(path.join(__dirname,'public')));*/
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.get('/',(_req,res,_next)=>{
