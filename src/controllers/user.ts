@@ -72,11 +72,14 @@ export const validate = async (req: Request, res: Response, next: NextFunction) 
     }
 }
 
-export const uploadAvatar = async (_req: Request, res: Response, next: NextFunction) => {
+export const uploadAvatar = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        const {userId} = req.body;
+        const avatar = `${req.protocol}://${req.headers.host}/uploads/${req.file.filename}`;
+        await User.updateOne({_id:userId},{avatar})
         res.json({
             success:true,
-            data:'http://localhost/img/24e-logo.e2c3ec70.png'
+            data:avatar
         })
     }catch (error) {
         next(error)
