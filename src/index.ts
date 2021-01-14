@@ -8,7 +8,9 @@ import path from "path";
 import 'dotenv/config';          // 读取 .env 然后写入 process.env
 import errorMiddleware from "./middleware/errorMiddleware";
 import HttpException from "./exception/HttpException";
+import {Slider} from "./models";
 import * as UserController from './controllers/user'
+import * as SliderController from './controllers/slider'
 import bodyParser from "body-parser";
 
 
@@ -55,6 +57,8 @@ app.post('/user/login',UserController.login);
 app.get('/user/validate',UserController.validate)
 app.post('/user/uploadAvatar',upload.single('avatar'), UserController.uploadAvatar)
 
+app.get('/sliders/list',SliderController.list)
+
 // 没有匹配到任何路由，则创建一个自定义404错误对象并传递给错误处理中间件
 app.use((_req:Request,_res:Response,next:NextFunction)=>{
     const error:HttpException = new HttpException(404,'尚未为此路径分配路由')
@@ -68,9 +72,28 @@ app.use(errorMiddleware);
     await mongoose.set('useNewUrlParser',true);
     await mongoose.set('useUnifiedTopology',true);
     const MONGODB_URL = process.env.MONGODB_URL || `mongodb://localhost/wuxuwei`;
-    await mongoose.connect(MONGODB_URL)
+    await mongoose.connect(MONGODB_URL);
+    await createInitialSliders();
     const PORT = process.env.PORT || 8003;
     app.listen(PORT,()=>{
         console.log(`Running on http://localhost:${PORT}`)
     })
 })()
+
+async function createInitialSliders() {
+    const sliders = await Slider.find();
+    if(sliders.length === 0) {
+        const sliders = [
+            {
+                url:'https://imgsa.baidu.com/forum/w%3D580/sign=815c232d5f3d26972ed3085565fab24f/940b0ff2d7ca7bcb2bf6d9c8b0096b63f724a84a.jpg',
+            },
+            {
+                url:'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2805577034,826713399&fm=26&gp=0.jpg',
+            },
+            {
+                url:'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3665917667,4181822611&fm=26&gp=0.jpg',
+            }
+        ]
+        await Slider.create(sliders)
+    }
+}
