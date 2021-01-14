@@ -40,6 +40,7 @@ app.post('/user/register',UserController.register);
 // 登录接口
 app.post('/user/login',UserController.login);
 app.get('/user/validate',UserController.validate)
+app.post('/user/uploadAvatar',UserController.uploadAvatar)
 // 没有匹配到任何路由，则创建一个自定义404错误对象并传递给错误处理中间件
 app.use((_req:Request,_res:Response,next:NextFunction)=>{
     const error:HttpException = new HttpException(404,'尚未为此路径分配路由')
@@ -51,7 +52,7 @@ app.use(errorMiddleware);
     await mongoose.set('useUnifiedTopology',true);
     const MONGODB_URL = process.env.MONGODB_URL || `mongodb://localhost/wuxuwei`;
     await mongoose.connect(MONGODB_URL)
-    const PORT = process.env.PORT || 8002;
+    const PORT = process.env.PORT || 8003;
     app.listen(PORT,()=>{
         console.log(`Running on http://localhost:${PORT}`)
     })

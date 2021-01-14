@@ -71,3 +71,14 @@ export const validate = async (req: Request, res: Response, next: NextFunction) 
         next(new HttpException(UNAUTHORIZED, 'authorization 未提供'))
     }
 }
+
+export const uploadAvatar = async (_req: Request, res: Response, next: NextFunction) => {
+    try {
+        res.json({
+            success:true,
+            data:'http://localhost/img/24e-logo.e2c3ec70.png'
+        })
+    }catch (error) {
+        next(error)
+    }
+}
