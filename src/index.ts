@@ -29,7 +29,6 @@ const app:Express = express();
 /*app.use(cors);
 app.use(morgan('dev'));
 app.use(helmet);*/
-/*app.use(express.static(path.join(__dirname,'public')));*/
 app.use(express.static(path.join(__dirname,'public')));
 app.all('*', function(req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
@@ -77,7 +76,7 @@ app.use(errorMiddleware);
     await mongoose.connect(MONGODB_URL);
     await createInitialSliders();
     await createInitialLessons();
-    const PORT = process.env.PORT || 8004;
+    const PORT = process.env.PORT || 8003;
     app.listen(PORT,()=>{
         console.log(`Running on http://localhost:${PORT}`)
     })
