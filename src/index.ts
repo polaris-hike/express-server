@@ -8,9 +8,10 @@ import path from "path";
 import 'dotenv/config';          // 读取 .env 然后写入 process.env
 import errorMiddleware from "./middleware/errorMiddleware";
 import HttpException from "./exception/HttpException";
-import {Slider} from "./models";
+import {Lesson, Slider} from './models';
 import * as UserController from './controllers/user'
 import * as SliderController from './controllers/slider'
+import * as LessonController from './controllers/lesson'
 import bodyParser from "body-parser";
 
 
@@ -58,6 +59,7 @@ app.get('/user/validate',UserController.validate)
 app.post('/user/uploadAvatar',upload.single('avatar'), UserController.uploadAvatar)
 
 app.get('/sliders/list',SliderController.list)
+app.get('/lessons/list',LessonController.list)
 
 // 没有匹配到任何路由，则创建一个自定义404错误对象并传递给错误处理中间件
 app.use((_req:Request,_res:Response,next:NextFunction)=>{
@@ -74,7 +76,8 @@ app.use(errorMiddleware);
     const MONGODB_URL = process.env.MONGODB_URL || `mongodb://localhost/wuxuwei`;
     await mongoose.connect(MONGODB_URL);
     await createInitialSliders();
-    const PORT = process.env.PORT || 8003;
+    await createInitialLessons();
+    const PORT = process.env.PORT || 8004;
     app.listen(PORT,()=>{
         console.log(`Running on http://localhost:${PORT}`)
     })
@@ -95,5 +98,194 @@ async function createInitialSliders() {
             }
         ]
         await Slider.create(sliders)
+    }
+}
+
+async function createInitialLessons() {
+    const lessons = await Lesson.find();
+    if(lessons.length === 0) {
+        const lessons = [
+            {
+                order: 1,
+                title: '1.React全栈架构',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
+                price: '¥100.00元',
+                category: 'react'
+            },
+            {
+                order: 2,
+                title: '2.React全栈架构',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
+                price: '¥200.00元',
+                category: 'react'
+            },
+            {
+                order: 3,
+                title: '3.React全栈架构',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
+                price: '¥300.00元',
+                category: 'react'
+            },
+            {
+                order: 4,
+                title: '4.React全栈架构',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
+                price: '¥400.00元',
+                category: 'react'
+            },
+            {
+                order: 5,
+                title: '5.React全栈架构',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
+                price: '¥500.00元',
+                category: 'react'
+            },
+            {
+                order: 6,
+                title: '6.Vue从入门到项目实战',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
+                price: '¥100.00元',
+                category: 'vue'
+            },
+            {
+                order: 7,
+                title: '7.Vue从入门到项目实战',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
+                price: '¥200.00元',
+                category: 'vue'
+            },
+            {
+                order: 8,
+                title: '8.Vue从入门到项目实战',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
+                price: '¥300.00元',
+                category: 'vue'
+            },
+            {
+                order: 9,
+                title: '9.Vue从入门到项目实战',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
+                price: '¥400.00元',
+                category: 'vue'
+            },
+            {
+                order: 10,
+                title: '10.Vue从入门到项目实战',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
+                price: '¥500.00元',
+                category: 'vue'
+            },
+            {
+                order: 11,
+                title: '11.React全栈架构',
+                "video": "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
+                price: '¥600.00元',
+                category: 'react'
+            },
+            {
+                order: 12,
+                title: '12.React全栈架构',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
+                price: '¥700.00元',
+                category: 'react'
+            },
+            {
+                order: 13,
+                title: '13.React全栈架构',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
+                price: '¥800.00元',
+                category: 'react'
+            },
+            {
+                order: 14,
+                title: '14.React全栈架构',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
+                price: '¥900.00元',
+                category: 'react'
+            },
+            {
+                order: 15,
+                title: '15.React全栈架构',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
+                price: '¥1000.00元',
+                category: 'react'
+            },
+            {
+                order: 16,
+                title: '16.Vue从入门到项目实战',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
+                price: '¥600.00元',
+                category: 'vue'
+            },
+            {
+                order: 17,
+                title: '17.Vue从入门到项目实战',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
+                price: '¥700.00元',
+                category: 'vue'
+            },
+            {
+                order: 18,
+                title: '18.Vue从入门到项目实战',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
+                price: '¥800.00元',
+                category: 'vue'
+            },
+            {
+                order: 19,
+                title: '19.Vue从入门到项目实战',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
+                price: '¥900.00元',
+                category: 'vue'
+            },
+            {
+                order: 20,
+                title: '20.Vue从入门到项目实战',
+                video: "http://img.zhufengpeixun.cn/gee2.mp4",
+                poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
+                url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
+                price: '¥1000.00元',
+                category: 'vue'
+            }
+        ];
+        await Lesson.create(lessons)
     }
 }

@@ -1,5 +1,5 @@
 node_modules
 .idea
-src/public/upload
+src/public/uploads
 .env
 dist
