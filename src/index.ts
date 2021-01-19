@@ -111,7 +111,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
-                price: '¥100.00元',
+                price: 100.00,
                 category: 'react'
             },
             {
@@ -120,7 +120,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
-                price: '¥200.00元',
+                price: 200.00,
                 category: 'react'
             },
             {
@@ -129,7 +129,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
-                price: '¥300.00元',
+                price: 300.00,
                 category: 'react'
             },
             {
@@ -138,7 +138,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
-                price: '¥400.00元',
+                price: 400.00,
                 category: 'react'
             },
             {
@@ -147,7 +147,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
-                price: '¥500.00元',
+                price: 500.00,
                 category: 'react'
             },
             {
@@ -156,7 +156,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
-                price: '¥100.00元',
+                price: 100.00,
                 category: 'vue'
             },
             {
@@ -165,7 +165,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
-                price: '¥200.00元',
+                price: 200.00,
                 category: 'vue'
             },
             {
@@ -174,7 +174,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
-                price: '¥300.00元',
+                price: 300.00,
                 category: 'vue'
             },
             {
@@ -183,7 +183,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
-                price: '¥400.00元',
+                price: 400.00,
                 category: 'vue'
             },
             {
@@ -192,7 +192,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
-                price: '¥500.00元',
+                price: 500.00,
                 category: 'vue'
             },
             {
@@ -201,7 +201,7 @@ async function createInitialLessons() {
                 "video": "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
-                price: '¥600.00元',
+                price: 600.00,
                 category: 'react'
             },
             {
@@ -210,7 +210,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
-                price: '¥700.00元',
+                price: 700.00,
                 category: 'react'
             },
             {
@@ -219,7 +219,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
-                price: '¥800.00元',
+                price: 800.00,
                 category: 'react'
             },
             {
@@ -228,7 +228,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
-                price: '¥900.00元',
+                price: 900.00,
                 category: 'react'
             },
             {
@@ -237,7 +237,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/react/img/react.jpg",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/react.png',
-                price: '¥1000.00元',
+                price: 1000.00,
                 category: 'react'
             },
             {
@@ -246,7 +246,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
-                price: '¥600.00元',
+                price: 600.00,
                 category: 'vue'
             },
             {
@@ -255,7 +255,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
-                price: '¥700.00元',
+                price: 700.00,
                 category: 'vue'
             },
             {
@@ -264,7 +264,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
-                price: '¥800.00元',
+                price: 800.00,
                 category: 'vue'
             },
             {
@@ -273,7 +273,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
-                price: '¥900.00元',
+                price: 900.00,
                 category: 'vue'
             },
             {
@@ -282,7 +282,7 @@ async function createInitialLessons() {
                 video: "http://img.zhufengpeixun.cn/gee2.mp4",
                 poster: "http://www.zhufengpeixun.cn/vue/img/vue.png",
                 url: 'http://www.zhufengpeixun.cn/themes/jianmo2/images/vue.png',
-                price: '¥1000.00元',
+                price: 1000.00,
                 category: 'vue'
             }
         ];
